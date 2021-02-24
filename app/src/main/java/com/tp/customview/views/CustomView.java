@@ -44,6 +44,8 @@ public class CustomView extends View {
         rectSquare = new Rect();
         paintSquare = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+        paintSquare.setColor(Color.GREEN);
+
         //pos or size of square can be changed using RECTF
         //AntiAlias - user friendly and less pixalated
 
@@ -54,11 +56,19 @@ public class CustomView extends View {
 
         //rect object is used to set position and sizze for our square
         //paint object is used to define color and styling for the rect object
-        rectSquare.left = 10;
-        rectSquare.top = 10;
+        rectSquare.left = 50;
+        rectSquare.top = 50;
         rectSquare.right = rectSquare.left + SQUARE_SIZZE;
         rectSquare.bottom = rectSquare.top + SQUARE_SIZZE;
-        paintSquare.setColor(Color.GREEN);
+        // paintSquare.setColor(Color.GREEN);
         canvas.drawRect(rectSquare, paintSquare);
+    }
+
+    public void swapColor() {
+
+        paintSquare.setColor(paintSquare.getColor() == Color.GREEN ? Color.RED : Color.GREEN);
+
+       // invalidate(); // runs synchronously, onDraw imm called, might block ui
+        postInvalidate(); //run asynchronously,  does not block ui, recommended method
     }
 }
